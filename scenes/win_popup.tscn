@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqkoh460s0ctq"]
+
+[ext_resource type="Script" uid="uid://dpqc3jlmt3j2" path="res://scripts/win_popup.gd" id="1_8cckr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ou1d"]
+bg_color = Color(0.099986, 0.099986, 0.099986, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uvfcp"]
+bg_color = Color(0.385493, 0.385493, 0.385492, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Win" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_8cckr")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.5
+offset_top = -102.5
+offset_right = 153.5
+offset_bottom = 102.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ou1d")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -114.0
+offset_top = -57.0
+offset_right = 114.0
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "You Won!"
+
+[node name="Menu" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -64.0
+offset_right = 65.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_uvfcp")
+text = "Back to menu"
+
+[connection signal="pressed" from="Panel/Menu" to="." method="_on_menu_pressed"]

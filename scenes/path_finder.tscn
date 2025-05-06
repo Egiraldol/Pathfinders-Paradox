@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://dm015ssg85gso"]
+
+[ext_resource type="Script" uid="uid://dpndam0x8w70v" path="res://scripts/path_finder.gd" id="1_4br48"]
+[ext_resource type="Texture2D" uid="uid://cm2xpeuylyddr" path="res://assets/sprites/PathFinder.png" id="1_nkgfs"]
+[ext_resource type="Texture2D" uid="uid://dwf80ylmrr2iu" path="res://assets/sprites/Mask.png" id="2_srugp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5ug6"]
+atlas = ExtResource("1_nkgfs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_424kh"]
+atlas = ExtResource("1_nkgfs")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rfwfy"]
+atlas = ExtResource("1_nkgfs")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5gsuq"]
+atlas = ExtResource("1_nkgfs")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrot0"]
+atlas = ExtResource("1_nkgfs")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7uwgf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5ug6")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_424kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rfwfy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5gsuq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrot0")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwnqu"]
+size = Vector2(14, 16)
+
+[node name="PathFinder" type="CharacterBody2D"]
+script = ExtResource("1_4br48")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(4, -4)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_7uwgf")
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.720724
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3.5, -4)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_pwnqu")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(4, -4)
+shadow_enabled = true
+texture = ExtResource("2_srugp")
+texture_scale = 0.5
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
